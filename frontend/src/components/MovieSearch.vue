@@ -10,7 +10,9 @@
           @input="resetError"
         />
         <button type="submit" class="search-button" :disabled="isLoading">
-          <span v-if="!isLoading">Buscar</span>
+          <span v-if="!isLoading">
+            <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
+          </span>
           <span v-else class="loading-dots">
             <span>.</span><span>.</span><span>.</span>
           </span>
@@ -79,18 +81,23 @@ const resetError = () => {
 
 .search-input:focus {
   outline: none;
-  border-color: #42b983;
+  border-color: var(--primary-color);
 }
 
 .search-button {
+  background: transparent;
   padding: 0.75rem 1.5rem;
-  background-color: #42b983;
+  background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.3s;
+}
+
+.search-button span{
+  background: transparent;
 }
 
 .search-button:hover:not(:disabled) {

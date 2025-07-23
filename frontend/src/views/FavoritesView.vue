@@ -13,7 +13,7 @@
         <option 
           v-for="genre in genres" 
           :key="genre.id" 
-          :value="genre.id"
+          :value="genre.name"
         >
           {{ genre.name }}
         </option>
@@ -58,6 +58,9 @@ const filteredFavorites = computed(() => {
 </script>
 
 <style scoped>
+body{
+  background-color: var(--secondary-color);
+}
 .favorites-view {
   max-width: 1200px;
   margin: 0 auto;

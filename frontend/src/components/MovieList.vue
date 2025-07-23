@@ -5,7 +5,9 @@
     </div>
     
     <ul v-else class="movie-grid">
-      <li v-for="movie in movies" :key="movie.id" class="movie-card">
+      <li v-for="movie in movies" :key="movie.id" 
+        class="movie-card"
+        @click="goToMovieDetails('MovieDetails',movie.id)">
         <div class="movie-poster">
           <img 
             :src="movie.poster_path 
@@ -47,7 +49,11 @@
 
 <script setup>
 
+import { useRouter } from 'vue-router';
 import { useMoviesStore } from '@/store/movies';
+import { formatDate } from '@/utils/helpers';
+
+const router = useRouter();
 
 defineProps({
   movies: {
@@ -71,12 +77,6 @@ const removeFromFavorites = (movieId) => {
   moviesStore.removeFavorite(movieId);
 };
 
-const formatDate = (dateString) => {
-  if (!dateString) return 'Data desconhecida';
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  return new Date(dateString).toLocaleDateString('pt-BR', options);
-};
-
 const truncateText = (text, maxLength) => {
   if (!text) return 'Sinopse não disponível';
   return text.length > maxLength 
@@ -87,10 +87,13 @@ const truncateText = (text, maxLength) => {
 const handleImageError = (event) => {
   event.target.src = '/placeholder-movie.gif';
 };
+
+const goToMovieDetails = (routeName,movieId) => {
+  router.push({ name: routeName, params: { id: movieId } });
+};
 </script>
 
 <style scoped>
-/* Estilos com foco em UX responsivo */
 .movie-list {
   margin: 2rem 0;
 }
@@ -181,7 +184,7 @@ const handleImageError = (event) => {
 }
 
 .action-button.add {
-  background-color: #42b983;
+  background-color: var(--primary-color);
   color: white;
 }
 

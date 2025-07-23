@@ -27,9 +27,12 @@ export const useMoviesStore = defineStore('movies', {
       const allGenres = state.favorites.flatMap(movie => movie.genre_ids);
       return [...new Set(allGenres)];
     },
-    favoritesByGenre: (state) => (genreId) => {
-      return genreId 
-        ? state.favorites.filter(movie => movie.genre_ids.includes(genreId))
+    favoritesByGenre: (state) => (name) => {
+      if(state.favorites.length === 0) {
+        return [...state.favorites];
+      }
+      return name 
+        ? state.favorites.filter(movie => movie.genres?.some(genre => genre.name === name))
         : state.favorites;
     }
   }

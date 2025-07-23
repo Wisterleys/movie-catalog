@@ -23,7 +23,6 @@
 import { useMoviesStore } from '@/store/movies';
 import MovieSearch from '@/components/MovieSearch.vue';
 import MovieList from '@/components/MovieList.vue';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 const moviesStore = useMoviesStore();
 </script>
@@ -85,7 +84,7 @@ const moviesStore = useMoviesStore();
 
 /* Acessibilidade - foco visível */
 .favorites-badge:focus-visible {
-  outline: 2px solid #42b983;
+  outline: 2px solid var(--primary-color);
   outline-offset: 2px;
   border-radius: 4px;
 }

@@ -32,3 +32,35 @@ export const getGenres = async () => {
     throw error;
   }
 };
+
+export const getMovieDetails = async (movieId) => {
+  try {
+    const response = await tmdbApi.get(`/movie/${movieId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching movie details:', error);
+    throw error;
+  }
+}
+
+export const getSimilarMovies = async (movieId) => {
+  try {
+    const response = await tmdbApi.get(`/movie/${movieId}/similar`);
+    return response.data.results;
+  } catch (error) {
+    console.error('Error fetching similar movies:', error);
+    throw error;
+  }
+};
+
+export const getMovieTrailer = async (movieId) => {
+  try {
+    const response = await tmdbApi.get(`/movie/${movieId}/videos`);
+    const trailers = response.data.results;
+
+    return trailers.length > 0 ? trailers : [];
+  } catch (error) {
+    console.error('Error fetching movie trailers:', error);
+    throw error;
+  }
+};
