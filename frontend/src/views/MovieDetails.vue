@@ -19,6 +19,7 @@
           loading="lazy"
         />
         <button 
+          v-if="!isFavorite"
           @click="toggleFavorite"
           class="favorite-button"
           :class="{ 'is-favorite': isFavorite }"
@@ -72,10 +73,8 @@
       </div>
     </div>
 
-    <!-- Conteúdo detalhado -->
     <div class="movie-content">
 
-      <!-- Seção de Trailer atualizada -->
       <section class="trailer-section">
         <h2><font-awesome-icon :icon="['fas', 'film']" /> Trailer</h2>
 
